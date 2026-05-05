@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import org.fauzan0022.ternak.database.TernakDb
+import org.fauzan0022.ternak.ui.screen.DetailViewModel
+import org.fauzan0022.ternak.ui.screen.KesehatanViewModel
 import org.fauzan0022.ternak.ui.screen.MainViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
