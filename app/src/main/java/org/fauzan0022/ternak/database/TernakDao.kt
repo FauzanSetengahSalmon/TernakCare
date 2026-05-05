@@ -19,5 +19,5 @@ interface TernakDao {
     suspend fun getById(id: Long): Ternak?
 
     @Query("DELETE FROM ternak WHERE id = :id")
-    suspend fun deleteById(id: Long)
+    suspend fun deleteById(id: Ternak)
 }

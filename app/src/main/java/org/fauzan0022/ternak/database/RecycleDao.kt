@@ -13,5 +13,5 @@ interface RecycleDao {
     fun getAll(): Flow<List<TernakRecycle>>
 
     @Query("DELETE FROM recycle WHERE id = :id")
-    suspend fun deleteById(id: Long)
+    suspend fun deleteById(id: TernakRecycle)
 }

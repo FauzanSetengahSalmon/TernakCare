@@ -1,7 +1,6 @@
 package org.fauzan0022.ternak.database
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
@@ -16,5 +15,5 @@ interface KesehatanDao {
     fun getByTernak(id: Long): Flow<List<Kesehatan>>
 
     @Query("DELETE FROM kesehatan WHERE id = :id")
-    suspend fun deleteById(id: Long)
+    suspend fun deleteById(id: Kesehatan)
 }
