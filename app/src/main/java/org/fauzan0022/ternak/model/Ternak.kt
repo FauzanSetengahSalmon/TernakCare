@@ -7,7 +7,12 @@ import androidx.room.PrimaryKey
 data class Ternak(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val nama: String,
-    val jenis: String,
-    val umur: Int
+    val namaHewan: String,
+    val jenisHewan: String,
+    val jenisKelamin: String,
+    val umurBulan: Int,
+    val beratKg: Double,
+    val statusSehat: Boolean,
+    val tanggalMasuk: String,
+    val catatan: String
 )

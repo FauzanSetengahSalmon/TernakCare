@@ -6,7 +6,12 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "recycle")
 data class TernakRecycle(
     @PrimaryKey val id: Long,
-    val nama: String,
-    val jenis: String,
-    val umur: Int
+    val namaHewan: String,
+    val jenisHewan: String,
+    val jenisKelamin: String,
+    val umurBulan: Int,
+    val beratKg: Double,
+    val statusSehat: Boolean,
+    val tanggalMasuk: String,
+    val catatan: String
 )
