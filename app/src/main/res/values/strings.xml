@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Ternak</string>
+    <string name="app_name">TernakCare</string>
+    <string name="tambah_ternak">Tambah Ternak</string>
+    <string name="edit_ternak">Edit Data</string>
+    <string name="kembali">Kembali</string>
+    <string name="medis">Medis</string>
+    <string name="hapus">Hapus</string>
+    <string name="identitas_ternak">Identitas Ternak</string>
+    <string name="karakteristik_fisik">Karakteristik Fisik</string>
+    <string name="jenis_kelamin">Jenis Kelamin</string>
 </resources>

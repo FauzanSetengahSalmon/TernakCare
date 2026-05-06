@@ -1,19 +1,23 @@
 package org.fauzan0022.ternak.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import org.fauzan0022.ternak.model.Kesehatan
 
 @Dao
 interface KesehatanDao {
-    @Insert
-    suspend fun insert(kesehatan: Kesehatan)
-
-    @Query("SELECT * FROM kesehatan WHERE ternakId = :id ORDER BY id DESC")
+    @Query("SELECT * FROM kesehatan WHERE ternakId=:id ORDER BY id DESC")
     fun getByTernak(id: Long): Flow<List<Kesehatan>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(data: Kesehatan)
+
+    @Update
+    suspend fun update(data: Kesehatan)
+
     @Query("DELETE FROM kesehatan WHERE id = :id")
-    suspend fun deleteById(id: Kesehatan)
+    suspend fun delete(id: Int)
+
+    @Query("DELETE FROM kesehatan WHERE ternakId = :ternakId")
+    suspend fun deleteByTernakId(ternakId: Long)
 }
