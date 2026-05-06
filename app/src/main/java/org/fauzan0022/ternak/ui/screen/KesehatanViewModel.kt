@@ -25,9 +25,4 @@ class KesehatanViewModel(private val dao: KesehatanDao) : ViewModel() {
             dao.delete(id)
         }
     }
-    fun deleteAllByTernak(ternakId: Long) {
-        viewModelScope.launch {
-            dao.deleteByTernakId(ternakId)
-        }
-    }
 }
