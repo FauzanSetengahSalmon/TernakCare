@@ -56,6 +56,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -99,11 +100,11 @@ fun MainScreen(navController: NavHostController) {
                         }) {
                             Icon(
                                 imageVector = if (isDarkMode) Icons.Default.LightMode else Icons.Default.DarkMode,
-                                contentDescription = "Ganti Tema"
+                                contentDescription = stringResource(R.string.ganti_tema)
                             )
                         }
                         IconButton(onClick = { navController.navigate(Screen.Recycle.route) }) {
-                            Icon(Icons.Default.DeleteSweep, "Recycle Bin")
+                            Icon(Icons.Default.DeleteSweep, stringResource(R.string.recycle))
                         }
                         IconButton(onClick = {
                             scope.launch { dataStore.saveLayout(!showList) }
@@ -126,7 +127,7 @@ fun MainScreen(navController: NavHostController) {
                     contentColor = MaterialTheme.colorScheme.onPrimary,
                     shape = RoundedCornerShape(16.dp)
                 ) {
-                    Icon(Icons.Filled.Add, "Tambah")
+                    Icon(Icons.Filled.Add, stringResource(R.string.tambah))
                 }
             }
         ) { padding ->
@@ -157,7 +158,7 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
                     )
                     Spacer(Modifier.height(16.dp))
                     Text(
-                        "Kandang masih kosong...",
+                        stringResource(R.string.dataKosong),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.outline
                     )
