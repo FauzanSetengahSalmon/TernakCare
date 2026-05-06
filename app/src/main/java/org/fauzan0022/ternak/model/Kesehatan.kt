@@ -8,6 +8,10 @@ data class Kesehatan(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val ternakId: Long,
+    val tanggalPeriksa: String,
     val kondisi: String,
-    val catatan: String
+    val suhuTubuh: Double,
+    val diagnosa: String,
+    val tindakan: String,
+    val dokter: String
 )
