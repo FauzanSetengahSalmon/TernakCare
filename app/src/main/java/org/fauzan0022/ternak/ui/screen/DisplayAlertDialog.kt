@@ -1,6 +1,8 @@
 package org.fauzan0022.ternak.ui.screen
 
-import android.content.res.Configuration
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material3.AlertDialog
@@ -9,12 +11,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import org.fauzan0022.ternak.ui.theme.TernakTheme
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun DisplayAlertDialog(
+    title: String,
+    message: String,
+    confirmText: String,
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
@@ -29,22 +36,23 @@ fun DisplayAlertDialog(
         },
 
         title = {
-            Text(
-                text = "Pindahkan ke Sampah?",
-                fontWeight = FontWeight.Bold
-            )
+                Text(
+                    text = title,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
         },
-
         text = {
-            Text(
-                text = "Data ini akan dipindahkan ke Recycle Bin. Kamu masih bisa memulihkannya nanti sebelum dihapus permanen."
-            )
+                Text(
+                    text = message,
+                    textAlign = TextAlign.Center
+                )
         },
 
         confirmButton = {
             TextButton(onClick = { onConfirm() }) {
                 Text(
-                    text = "Ya, Hapus",
+                    text = confirmText,
                     color = MaterialTheme.colorScheme.error,
                     fontWeight = FontWeight.Bold
                 )
@@ -57,16 +65,4 @@ fun DisplayAlertDialog(
             }
         }
     )
-}
-
-@Preview(showBackground = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
-@Composable
-fun DialogPreview() {
-    TernakTheme {
-        DisplayAlertDialog(
-            onDismiss = {},
-            onConfirm = {}
-        )
-    }
 }

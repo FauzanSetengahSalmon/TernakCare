@@ -1,5 +1,6 @@
 package org.fauzan0022.ternak.ui.screen
 
+import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,6 +24,7 @@ import androidx.compose.material.icons.filled.DeleteSweep
 import androidx.compose.material.icons.filled.Restore
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,20 +32,26 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import org.fauzan0022.ternak.model.TernakRecycle
 import org.fauzan0022.ternak.util.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,13 +61,24 @@ fun RecycleScreen(nav: NavHostController) {
     val vm: MainViewModel = viewModel(factory = ViewModelFactory(context))
     val data by vm.recycleData.collectAsState()
 
+    var itemToDelete by remember { mutableStateOf<TernakRecycle?>(null) }
+    var showDialog by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Recycle Bin", fontWeight = FontWeight.Bold) },
+                title = {
+                    Text(
+                        text = "Tempat Sampah",
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold)
+                    )
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary
+                    scrolledContainerColor = Color.Unspecified,
+                    navigationIconContentColor = Color.Unspecified,
+                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    actionIconContentColor = Color.Unspecified
                 ),
                 navigationIcon = {
                     IconButton(onClick = { nav.popBackStack() }) {
@@ -71,7 +91,7 @@ fun RecycleScreen(nav: NavHostController) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFFFDFDFD))
+                .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
         ) {
             if (data.isEmpty()) {
@@ -80,58 +100,107 @@ fun RecycleScreen(nav: NavHostController) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Icon(Icons.Default.DeleteSweep, null, modifier = Modifier.size(64.dp), tint = Color.LightGray)
-                    Text("Tempat sampah kosong", color = Color.Gray)
+                    Icon(
+                        imageVector = Icons.Default.DeleteSweep,
+                        contentDescription = null,
+                        modifier = Modifier.size(80.dp),
+                        tint = MaterialTheme.colorScheme.outlineVariant
+                    )
+                    Spacer(Modifier.height(16.dp))
+                    Text(
+                        text = "Tempat sampah kosong",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.outline
+                    )
                 }
             } else {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(16.dp)
+                    contentPadding = PaddingValues(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     item {
                         Card(
-                            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)),
-                            shape = RoundedCornerShape(16.dp)
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.7f)
+                            ),
+                            shape = RoundedCornerShape(20.dp)
                         ) {
-                            Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Row(
+                                modifier = Modifier.padding(20.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
                                 Column(Modifier.weight(1f)) {
-                                    Text("Total di Sampah", style = MaterialTheme.typography.labelLarge)
-                                    Text("${data.size} Ekor Ternak", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+                                    Text(
+                                        text = "Data Terhapus",
+                                        style = MaterialTheme.typography.labelLarge,
+                                        color = MaterialTheme.colorScheme.onErrorContainer
+                                    )
+                                    Text(
+                                        text = "${data.size} Ekor Ternak",
+                                        style = MaterialTheme.typography.headlineSmall,
+                                        fontWeight = FontWeight.ExtraBold,
+                                        color = MaterialTheme.colorScheme.onErrorContainer
+                                    )
                                 }
-                                Icon(Icons.Default.DeleteSweep, null, tint = MaterialTheme.colorScheme.error)
+                                Icon(
+                                    imageVector = Icons.Default.DeleteSweep,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.error,
+                                    modifier = Modifier.size(32.dp)
+                                )
                             }
                         }
                     }
 
                     items(data) { item ->
                         Card(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color.White),
-                            elevation = CardDefaults.cardElevation(2.dp),
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                            ),
                             shape = RoundedCornerShape(16.dp)
                         ) {
                             ListItem(
                                 colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                                 headlineContent = {
-                                    Text("${item.kodeTernak} - ${item.namaHewan}", fontWeight = FontWeight.Bold)
+                                    Text(
+                                        text = "${item.kodeTernak} - ${item.namaHewan}",
+                                        fontWeight = FontWeight.Bold,
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
                                 },
                                 supportingContent = {
-                                    Column {
-                                        Text("${item.jenisHewan} • ${item.umurBulan} Bln • ${item.beratKg} Kg")
+                                    Column(modifier = Modifier.padding(top = 4.dp)) {
+                                        Text(
+                                            text = "${item.jenisHewan} • ${item.umurBulan} Bln • ${item.beratKg} Kg",
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
 
-                                        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 4.dp)) {
+                                        Row(
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            modifier = Modifier.padding(top = 8.dp)
+                                        ) {
+                                            Surface(
+                                                color = MaterialTheme.colorScheme.secondaryContainer,
+                                                shape = RoundedCornerShape(6.dp)
+                                            ) {
+                                                Text(
+                                                    text = item.jenisKelamin,
+                                                    style = MaterialTheme.typography.labelSmall,
+                                                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                                )
+                                            }
+                                            Spacer(Modifier.width(8.dp))
                                             Text(
-                                                item.jenisKelamin,
-                                                style = MaterialTheme.typography.bodySmall,
-                                                color = MaterialTheme.colorScheme.primary,
-                                                modifier = Modifier.background(MaterialTheme.colorScheme.primaryContainer, RoundedCornerShape(4.dp)).padding(horizontal = 6.dp, vertical = 2.dp)
-                                            )
-                                            Spacer(Modifier.size(8.dp))
-                                            Text(
-                                                if (item.statusSehat) "Sehat" else "Sakit",
-                                                style = MaterialTheme.typography.bodySmall,
-                                                color = if (item.statusSehat) Color(0xFF2E7D32) else Color.Red
+                                                text = if (item.statusSehat) "Sehat" else "Sakit",
+                                                style = MaterialTheme.typography.labelSmall,
+                                                fontWeight = FontWeight.Bold,
+                                                color = if (item.statusSehat) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
                                             )
                                         }
                                     }
@@ -139,10 +208,21 @@ fun RecycleScreen(nav: NavHostController) {
                                 trailingContent = {
                                     Row {
                                         IconButton(onClick = { vm.restore(item) }) {
-                                            Icon(Icons.Default.Restore, "Pulihkan", tint = Color(0xFF2E7D32))
+                                            Icon(
+                                                imageVector = Icons.Default.Restore,
+                                                contentDescription = "Pulihkan",
+                                                tint = MaterialTheme.colorScheme.primary
+                                            )
                                         }
-                                        IconButton(onClick = { vm.deletePermanently(item) }) {
-                                            Icon(Icons.Default.DeleteForever, "Hapus Permanen", tint = MaterialTheme.colorScheme.error)
+                                        IconButton(onClick = {
+                                            itemToDelete = item
+                                            showDialog = true
+                                        }) {
+                                            Icon(
+                                                imageVector = Icons.Default.DeleteForever,
+                                                contentDescription = "Hapus Permanen",
+                                                tint = MaterialTheme.colorScheme.error
+                                            )
                                         }
                                     }
                                 }
@@ -151,6 +231,23 @@ fun RecycleScreen(nav: NavHostController) {
                     }
                 }
             }
+        }
+
+        if (showDialog && itemToDelete != null) {
+            DisplayAlertDialog(
+                title = "Hapus Permanen?",
+                message = "Data ${itemToDelete?.namaHewan} akan dihapus selamanya.",
+                confirmText = "Hapus",
+                onDismiss = {
+                    showDialog = false
+                    itemToDelete = null
+                },
+                onConfirm = {
+                    itemToDelete?.let { vm.deletePermanently(it) }
+                    showDialog = false
+                    itemToDelete = null
+                }
+            )
         }
     }
 }
