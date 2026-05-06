@@ -9,34 +9,23 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
-    name = "setting_preference"
-)
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "setting_preference")
 
 class SettingsDataStore(private val context: Context) {
-
     companion object {
         private val IS_LIST = booleanPreferencesKey("is_list")
         private val IS_DARK_MODE = booleanPreferencesKey("is_dark_mode")
     }
 
-    val layoutFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
-        preferences[IS_LIST] ?: true
-    }
+    val layoutFlow: Flow<Boolean> = context.dataStore.data.map { it[IS_LIST] ?: true }
 
     suspend fun saveLayout(isList: Boolean) {
-        context.dataStore.edit { preferences ->
-            preferences[IS_LIST] = isList
-        }
+        context.dataStore.edit { it[IS_LIST] = isList }
     }
 
-    val themeFlow: Flow<Boolean> = context.dataStore.data.map { preferences ->
-        preferences[IS_DARK_MODE] ?: false
-    }
+    val themeFlow: Flow<Boolean> = context.dataStore.data.map { it[IS_DARK_MODE] ?: false }
 
     suspend fun saveTheme(isDark: Boolean) {
-        context.dataStore.edit { preferences ->
-            preferences[IS_DARK_MODE] = isDark
-        }
+        context.dataStore.edit { it[IS_DARK_MODE] = isDark }
     }
 }
