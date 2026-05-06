@@ -8,4 +8,8 @@
     <string name="identitas_ternak">Identitas Ternak</string>
     <string name="karakteristik_fisik">Karakteristik Fisik</string>
     <string name="jenis_kelamin">Jenis Kelamin</string>
+    <string name="ganti_tema">Ganti Tema</string>
+    <string name="recycle">Recycle Bin</string>
+    <string name="tambah">Tambah</string>
+    <string name="dataKosong">Kandang Masih Kosong nih...</string>
 </resources>
