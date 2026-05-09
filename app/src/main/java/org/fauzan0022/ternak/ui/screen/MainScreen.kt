@@ -84,7 +84,7 @@ fun MainScreen(navController: NavHostController) {
             topBar = {
                 TopAppBar(
                     title = {
-                        Text("TernakCare", fontWeight = FontWeight.ExtraBold)
+                        Text(stringResource(R.string.app_name), fontWeight = FontWeight.ExtraBold)
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -113,7 +113,7 @@ fun MainScreen(navController: NavHostController) {
                                     if (showList) R.drawable.baseline_grid_view_24
                                     else R.drawable.baseline_view_list_24
                                 ),
-                                contentDescription = "Toggle Layout"
+                                contentDescription = stringResource(R.string.toggle_layout)
                             )
                         }
                     }
@@ -157,7 +157,7 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
                     )
                     Spacer(Modifier.height(16.dp))
                     Text(
-                        stringResource(R.string.dataKosong),
+                        stringResource(R.string.data_kosong),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.outline
                     )
@@ -211,12 +211,12 @@ fun SummaryHeader(data: List<Ternak>) {
         ) {
             Column {
                 Text(
-                    "Total Ternak",
+                    stringResource(R.string.total_ternak),
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Text(
-                    "${data.size} Ternak",
+                    stringResource(R.string.format_jumlah_ternak, data.size),
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.ExtraBold,
                     color = MaterialTheme.colorScheme.primary
@@ -230,13 +230,13 @@ fun SummaryHeader(data: List<Ternak>) {
                 ) {
                     Column(Modifier.padding(horizontal = 12.dp, vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
-                            "$sakit Sakit",
+                            stringResource(R.string.format_sakit, sakit),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.error
                         )
                         Text(
-                            "Perlu Cek",
+                            stringResource(R.string.perlu_cek),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onErrorContainer
                         )
@@ -309,10 +309,18 @@ fun ListItem(ternak: Ternak, onClick: () -> Unit) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(Icons.Default.History, null, Modifier.size(12.dp), tint = MaterialTheme.colorScheme.outline)
-                    Text(" ${ternak.umurBulan} bln", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.outline)
+                    Text(
+                        stringResource(R.string.format_bln_kecil, ternak.umurBulan.toString()),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline
+                    )
                     Spacer(Modifier.width(12.dp))
                     Icon(Icons.Default.Scale, null, Modifier.size(12.dp), tint = MaterialTheme.colorScheme.outline)
-                    Text(" ${ternak.beratKg} kg", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.outline)
+                    Text(
+                        stringResource(R.string.format_kg_kecil, ternak.beratKg.toString()),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline
+                    )
                 }
             }
             Icon(
@@ -336,7 +344,13 @@ fun GridItem(ternak: Ternak, onClick: () -> Unit) {
         Column(Modifier.padding(12.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.size(8.dp).background(if(ternak.statusSehat) Color(0xFF4CAF50) else Color.Red, CircleShape))
-                Text(ternak.jenisKelamin.uppercase(), style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                Text(
+                    if (ternak.jenisKelamin == "Jantan") stringResource(R.string.jantan).uppercase()
+                    else stringResource(R.string.betina).uppercase(),
+                    style = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
             }
 
             Spacer(Modifier.height(8.dp))
@@ -347,8 +361,8 @@ fun GridItem(ternak: Ternak, onClick: () -> Unit) {
             HorizontalDivider(Modifier.padding(vertical = 10.dp), thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
 
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                InfoItem("UMUR", "${ternak.umurBulan} Bln")
-                InfoItem("BERAT", "${ternak.beratKg} Kg", Alignment.End)
+                InfoItem(stringResource(R.string.label_umur_caps), stringResource(R.string.format_bln_kecil, ternak.umurBulan.toString()))
+                InfoItem(stringResource(R.string.label_berat_caps), stringResource(R.string.format_kg_kecil, ternak.beratKg.toString()), Alignment.End)
             }
         }
     }
@@ -361,7 +375,7 @@ fun StatusBadge(isSehat: Boolean) {
         shape = RoundedCornerShape(4.dp)
     ) {
         Text(
-            text = if (isSehat) "SEHAT" else "SAKIT",
+            text = if (isSehat) stringResource(R.string.sehat) else stringResource(R.string.sakit),
             modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
             fontSize = 9.sp,
             fontWeight = FontWeight.Black,

@@ -1,15 +1,66 @@
 <resources>
     <string name="app_name">TernakCare</string>
-    <string name="tambah_ternak">Tambah Ternak</string>
-    <string name="edit_ternak">Edit Data</string>
-    <string name="kembali">Kembali</string>
-    <string name="medis">Medis</string>
-    <string name="hapus">Hapus</string>
-    <string name="identitas_ternak">Identitas Ternak</string>
-    <string name="karakteristik_fisik">Karakteristik Fisik</string>
-    <string name="jenis_kelamin">Jenis Kelamin</string>
-    <string name="ganti_tema">Ganti Tema</string>
+    <string name="kembali">Back</string>
+    <string name="batal">Cancel</string>
+    <string name="hapus">Delete</string>
+    <string name="tambah">Add</string>
+    <string name="sehat">HEALTHY</string>
+    <string name="sakit">SICK</string>
+    <string name="jantan">Male</string>
+    <string name="betina">Female</string>
+
+    <string name="ganti_tema">Switch Theme</string>
     <string name="recycle">Recycle Bin</string>
-    <string name="tambah">Tambah</string>
-    <string name="dataKosong">Kandang Masih Kosong nih...</string>
+    <string name="toggle_layout">Toggle Layout</string>
+    <string name="data_kosong">No livestock data</string>
+    <string name="total_ternak">Total Livestock</string>
+    <string name="format_jumlah_ternak">%1$d Livestock</string>
+    <string name="format_sakit">%1$d Sick</string>
+    <string name="perlu_cek">Need Check</string>
+    <string name="label_umur_caps">AGE</string>
+    <string name="label_berat_caps">WEIGHT</string>
+    <string name="format_bln_kecil">%1$s mos</string>
+    <string name="format_kg_kecil">%1$s kg</string>
+
+    <string name="tambah_ternak">Add Livestock</string>
+    <string name="edit_ternak">Edit Livestock</string>
+    <string name="medis">Medical</string>
+    <string name="identitas_ternak">Livestock Identity</string>
+    <string name="karakteristik_fisik">Physical Characteristics</string>
+    <string name="kesehatan_catatan">Health &amp; Notes</string>
+    <string name="label_kode_ternak">Livestock ID/Code</string>
+    <string name="hint_kode_ternak">Example: AYM-001</string>
+    <string name="label_nama_hewan">Animal Name</string>
+    <string name="label_jenis_hewan">Animal Type</string>
+    <string name="label_umur_bln">Age (Mos)</string>
+    <string name="label_berat_kg">Weight (Kg)</string>
+    <string name="label_jenis_kelamin">Gender</string>
+    <string name="label_kondisi_saat_ini">Current Condition:</string>
+    <string name="label_catatan_tambahan">Additional Notes</string>
+    <string name="simpan_data_ternak">Save Livestock Data</string>
+    <string name="error_input_kosong">%1$s cannot be empty</string>
+    <string name="dialog_hapus_judul">Delete Data?</string>
+    <string name="dialog_hapus_pesan">This data will be moved to the trash.</string>
+
+    <string name="rekam_medis">Medical Records</string>
+    <string name="pemeriksaan_baru">New Examination</string>
+    <string name="riwayat_pemeriksaan">Examination History</string>
+    <string name="label_kondisi">Condition</string>
+    <string name="label_suhu">Temp °C</string>
+    <string name="label_diagnosa">Diagnosis</string>
+    <string name="label_tindakan">Action / Medicine</string>
+    <string name="label_tenaga_medis">Medical Personnel</string>
+    <string name="simpan_rekam_medis">Save Medical Record</string>
+    <string name="format_diagnosa">Diagnosis: %1$s</string>
+    <string name="format_tindakan">Action: %1$s</string>
+    <string name="tenaga_medis_umum">General</string>
+
+    <string name="tempat_sampah">Recycle Bin</string>
+    <string name="tempat_sampah_kosong">Recycle bin is empty</string>
+    <string name="data_terhapus">Deleted Data</string>
+    <string name="format_ekor_ternak">%1$d Livestock</string>
+    <string name="pulihkan">Restore</string>
+    <string name="hapus_permanen">Delete Permanently</string>
+    <string name="dialog_hapus_permanen_judul">Delete Permanently?</string>
+    <string name="dialog_hapus_permanen_pesan">%1$s data will be deleted forever.</string>
 </resources>

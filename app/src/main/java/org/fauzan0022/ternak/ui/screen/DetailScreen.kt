@@ -154,22 +154,22 @@ fun DetailScreen(nav: NavHostController, id: Long? = null) {
                 DetailTextField(
                     value = kodeTernak,
                     onValueChange = { kodeTernak = it; kodeError = false },
-                    label = "Kode/ID Ternak",
-                    placeholder = "Contoh: AYM-001",
+                    label = stringResource(R.string.label_kode_ternak),
+                    placeholder = stringResource(R.string.hint_kode_ternak),
                     isError = kodeError,
                     icon = Icons.Default.QrCode
                 )
                 DetailTextField(
                     value = nama,
                     onValueChange = { nama = it; namaError = false },
-                    label = "Nama Hewan",
+                    label = stringResource(R.string.label_nama_hewan),
                     isError = namaError,
                     icon = Icons.AutoMirrored.Filled.Label
                 )
                 DetailTextField(
                     value = jenisHewan,
                     onValueChange = { jenisHewan = it; jenisError = false },
-                    label = "Jenis Hewan",
+                    label = stringResource(R.string.label_jenis_hewan),
                     isError = jenisError,
                     icon = Icons.Default.Category
                 )
@@ -178,8 +178,13 @@ fun DetailScreen(nav: NavHostController, id: Long? = null) {
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     DetailTextField(
                         value = umurBulan,
-                        onValueChange = { if (it.all { c -> c.isDigit() }) { umurBulan = it; umurError = false } },
-                        label = "Umur (Bln)",
+                        onValueChange = { input->
+                            if (input.isEmpty() || input.toDoubleOrNull() != null) {
+                                umurBulan = input
+                                umurError = false
+                            }
+                        },
+                        label = stringResource(R.string.label_umur_bln),
                         modifier = Modifier.weight(1f),
                         isError = umurError,
                         keyboardType = KeyboardType.Number,
@@ -187,8 +192,13 @@ fun DetailScreen(nav: NavHostController, id: Long? = null) {
                     )
                     DetailTextField(
                         value = beratKg,
-                        onValueChange = { if (it.all { c -> c.isDigit() || c == '.' }) { beratKg = it; beratError = false } },
-                        label = "Berat (Kg)",
+                        onValueChange = { input->
+                            if (input.isEmpty() || input.toDoubleOrNull() != null) {
+                                beratKg = input
+                                beratError = false
+                            }
+                        },
+                        label = stringResource(R.string.label_berat_kg),
                         modifier = Modifier.weight(1f),
                         isError = beratError,
                         keyboardType = KeyboardType.Number,
@@ -196,18 +206,18 @@ fun DetailScreen(nav: NavHostController, id: Long? = null) {
                     )
                 }
 
-                Text(stringResource(R.string.jenis_kelamin), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                Text(stringResource(R.string.label_jenis_kelamin), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
 
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     GenderButton(
-                        label = "Jantan",
+                        label = stringResource(R.string.jantan),
                         isSelected = (jenisKelamin == "Jantan"),
                         icon = Icons.Default.Male,
                         modifier = Modifier.weight(1f),
                         onClick = { jenisKelamin = "Jantan" }
                     )
                     GenderButton(
-                        label = "Betina",
+                        label = stringResource(R.string.betina),
                         isSelected = (jenisKelamin == "Betina"),
                         icon = Icons.Default.Female,
                         modifier = Modifier.weight(1f),
@@ -215,19 +225,19 @@ fun DetailScreen(nav: NavHostController, id: Long? = null) {
                     )
                 }
             }
-            DetailCard(title = "Kesehatan & Catatan", icon = Icons.AutoMirrored.Filled.Notes) {
-                Text("Kondisi Saat Ini:", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+            DetailCard(title = stringResource(R.string.kesehatan_catatan), icon = Icons.AutoMirrored.Filled.Notes) {
+                Text(stringResource(R.string.label_kondisi_saat_ini), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
 
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     StatusButton(
-                        label = "SEHAT",
+                        label = stringResource(R.string.sehat),
                         isSelected = statusSehat,
                         activeColor = Color(0xFF4CAF50),
                         modifier = Modifier.weight(1f),
                         onClick = { statusSehat = true }
                     )
                     StatusButton(
-                        label = "SAKIT",
+                        label = stringResource(R.string.sakit),
                         isSelected = !statusSehat,
                         activeColor = MaterialTheme.colorScheme.error,
                         modifier = Modifier.weight(1f),
@@ -238,7 +248,7 @@ fun DetailScreen(nav: NavHostController, id: Long? = null) {
                 OutlinedTextField(
                     value = catatan,
                     onValueChange = { catatan = it },
-                    label = { Text("Catatan Tambahan") },
+                    label = { Text(stringResource(R.string.label_catatan_tambahan)) },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     minLines = 3,
@@ -279,7 +289,7 @@ fun DetailScreen(nav: NavHostController, id: Long? = null) {
             ) {
                 Icon(Icons.Default.Save, null)
                 Spacer(Modifier.width(8.dp))
-                Text("Simpan Data Ternak", fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.simpan_data_ternak), fontWeight = FontWeight.Bold)
             }
         }
     }
@@ -287,15 +297,15 @@ fun DetailScreen(nav: NavHostController, id: Long? = null) {
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Hapus Data?") },
-            text = { Text("Data ini akan dipindahkan ke tempat sampah.") },
+            title = { Text(stringResource(R.string.dialog_hapus_judul)) },
+            text = { Text(stringResource(R.string.dialog_hapus_pesan)) },
             confirmButton = {
                 TextButton(onClick = { id?.let { vm.delete(it) }; nav.popBackStack() }) {
-                    Text("Hapus", color = MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.hapus), color = MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showDeleteDialog = false }) { Text("Batal") }
+                TextButton(onClick = { showDeleteDialog = false }) { Text(stringResource(R.string.batal)) }
             }
         )
     }
@@ -340,8 +350,8 @@ fun StatusButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = if (isSelected) activeColor else MaterialTheme.colorScheme.surfaceVariant,
             contentColor = if (isSelected) {
-                    if (activeColor == MaterialTheme.colorScheme.error) MaterialTheme.colorScheme.onError
-                    else Color.White
+                if (activeColor == MaterialTheme.colorScheme.error) MaterialTheme.colorScheme.onError
+                else Color.White
             } else { MaterialTheme.colorScheme.onSurfaceVariant
             }
         ),
@@ -398,7 +408,7 @@ fun DetailTextField(
         supportingText = {
             if (isError) {
                 Text(
-                    text = "$label tidak boleh kosong",
+                    text = stringResource(R.string.error_input_kosong, label),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.error
                 )

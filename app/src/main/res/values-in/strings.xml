@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">TernakCare</string>
+    <string name="kembali">Kembali</string>
+    <string name="batal">Batal</string>
+    <string name="hapus">Hapus</string>
+    <string name="tambah">Tambah</string>
+    <string name="sehat">SEHAT</string>
+    <string name="sakit">SAKIT</string>
+    <string name="jantan">Jantan</string>
+    <string name="betina">Betina</string>
+
+    <string name="ganti_tema">Ganti Tema</string>
+    <string name="recycle">Tempat Sampah</string>
+    <string name="toggle_layout">Ganti Tampilan</string>
+    <string name="data_kosong">Belum ada data ternak</string>
+    <string name="total_ternak">Total Ternak</string>
+    <string name="format_jumlah_ternak">%1$d Ternak</string>
+    <string name="format_sakit">%1$d Sakit</string>
+    <string name="perlu_cek">Perlu Cek</string>
+    <string name="label_umur_caps">UMUR</string>
+    <string name="label_berat_caps">BERAT</string>
+    <string name="format_bln_kecil">%1$s bln</string>
+    <string name="format_kg_kecil">%1$s kg</string>
+
+    <string name="tambah_ternak">Tambah Ternak</string>
+    <string name="edit_ternak">Edit Ternak</string>
+    <string name="medis">Medis</string>
+    <string name="identitas_ternak">Identitas Ternak</string>
+    <string name="karakteristik_fisik">Karakteristik Fisik</string>
+    <string name="kesehatan_catatan">Kesehatan &amp; Catatan</string>
+    <string name="label_kode_ternak">Kode/ID Ternak</string>
+    <string name="hint_kode_ternak">Contoh: AYM-001</string>
+    <string name="label_nama_hewan">Nama Hewan</string>
+    <string name="label_jenis_hewan">Jenis Hewan</string>
+    <string name="label_umur_bln">Umur (Bln)</string>
+    <string name="label_berat_kg">Berat (Kg)</string>
+    <string name="label_jenis_kelamin">Jenis Kelamin</string>
+    <string name="label_kondisi_saat_ini">Kondisi Saat Ini:</string>
+    <string name="label_catatan_tambahan">Catatan Tambahan</string>
+    <string name="simpan_data_ternak">Simpan Data Ternak</string>
+    <string name="error_input_kosong">%1$s tidak boleh kosong</string>
+    <string name="dialog_hapus_judul">Hapus Data?</string>
+    <string name="dialog_hapus_pesan">Data ini akan dipindahkan ke tempat sampah.</string>
+
+    <string name="rekam_medis">Rekam Medis</string>
+    <string name="pemeriksaan_baru">Pemeriksaan Baru</string>
+    <string name="riwayat_pemeriksaan">Riwayat Pemeriksaan</string>
+    <string name="label_kondisi">Kondisi</string>
+    <string name="label_suhu">Suhu °C</string>
+    <string name="label_diagnosa">Diagnosa</string>
+    <string name="label_tindakan">Tindakan / Obat</string>
+    <string name="label_tenaga_medis">Tenaga Medis</string>
+    <string name="simpan_rekam_medis">Simpan Rekam Medis</string>
+    <string name="format_diagnosa">Diagnosa: %1$s</string>
+    <string name="format_tindakan">Tindakan: %1$s</string>
+    <string name="tenaga_medis_umum">Umum</string>
+
+    <string name="tempat_sampah">Tempat Sampah</string>
+    <string name="tempat_sampah_kosong">Tempat sampah kosong</string>
+    <string name="data_terhapus">Data Terhapus</string>
+    <string name="format_ekor_ternak">%1$d Ekor Ternak</string>
+    <string name="pulihkan">Pulihkan</string>
+    <string name="hapus_permanen">Hapus Permanen</string>
+    <string name="dialog_hapus_permanen_judul">Hapus Permanen?</string>
+    <string name="dialog_hapus_permanen_pesan">Data %1$s akan dihapus selamanya.</string>
+</resources>

@@ -44,8 +44,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import org.fauzan0022.ternak.R
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import org.fauzan0022.ternak.model.TernakRecycle
@@ -66,8 +68,8 @@ fun RecycleScreen(nav: NavHostController) {
             TopAppBar(
                 title = {
                     Text(
-                        text = "Tempat Sampah",
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold)
+                        text = stringResource(R.string.tempat_sampah),
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -79,7 +81,7 @@ fun RecycleScreen(nav: NavHostController) {
                 ),
                 navigationIcon = {
                     IconButton(onClick = { nav.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Kembali")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.kembali))
                     }
                 },
             )
@@ -88,7 +90,7 @@ fun RecycleScreen(nav: NavHostController) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
+                .background(MaterialTheme.colorScheme.surface)
                 .padding(padding)
         ) {
             if (data.isEmpty()) {
@@ -100,12 +102,12 @@ fun RecycleScreen(nav: NavHostController) {
                     Icon(
                         imageVector = Icons.Default.DeleteSweep,
                         contentDescription = null,
-                        modifier = Modifier.size(80.dp),
-                        tint = MaterialTheme.colorScheme.outlineVariant
+                        modifier = Modifier.size(100.dp),
+                        tint = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
                     )
                     Spacer(Modifier.height(16.dp))
                     Text(
-                        text = "Tempat sampah kosong",
+                        text = stringResource(R.string.tempat_sampah_kosong),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.outline
                     )
@@ -114,38 +116,38 @@ fun RecycleScreen(nav: NavHostController) {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     item {
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.7f)
+                                containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
                             ),
-                            shape = RoundedCornerShape(20.dp)
+                            shape = RoundedCornerShape(24.dp)
                         ) {
                             Row(
-                                modifier = Modifier.padding(20.dp),
+                                modifier = Modifier.padding(24.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Column(Modifier.weight(1f)) {
                                     Text(
-                                        text = "Data Terhapus",
+                                        text = stringResource(R.string.data_terhapus),
                                         style = MaterialTheme.typography.labelLarge,
-                                        color = MaterialTheme.colorScheme.onErrorContainer
+                                        color = MaterialTheme.colorScheme.error
                                     )
                                     Text(
                                         text = "${data.size} Ekor Ternak",
                                         style = MaterialTheme.typography.headlineSmall,
                                         fontWeight = FontWeight.ExtraBold,
-                                        color = MaterialTheme.colorScheme.onErrorContainer
+                                        color = MaterialTheme.colorScheme.onSurface
                                     )
                                 }
                                 Icon(
                                     imageVector = Icons.Default.DeleteSweep,
                                     contentDescription = null,
                                     tint = MaterialTheme.colorScheme.error,
-                                    modifier = Modifier.size(32.dp)
+                                    modifier = Modifier.size(40.dp)
                                 )
                             }
                         }
@@ -155,16 +157,17 @@ fun RecycleScreen(nav: NavHostController) {
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                                containerColor = MaterialTheme.colorScheme.surface
                             ),
-                            shape = RoundedCornerShape(16.dp)
+                            shape = RoundedCornerShape(20.dp),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                         ) {
                             ListItem(
                                 colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                                 headlineContent = {
                                     Text(
                                         text = "${item.kodeTernak} - ${item.namaHewan}",
-                                        fontWeight = FontWeight.Bold,
+                                        fontWeight = FontWeight.ExtraBold,
                                         style = MaterialTheme.typography.titleMedium,
                                         color = MaterialTheme.colorScheme.onSurface
                                     )
@@ -179,35 +182,42 @@ fun RecycleScreen(nav: NavHostController) {
 
                                         Row(
                                             verticalAlignment = Alignment.CenterVertically,
-                                            modifier = Modifier.padding(top = 8.dp)
+                                            modifier = Modifier.padding(top = 12.dp)
                                         ) {
                                             Surface(
-                                                color = MaterialTheme.colorScheme.secondaryContainer,
-                                                shape = RoundedCornerShape(6.dp)
+                                                color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.7f),
+                                                shape = RoundedCornerShape(8.dp)
                                             ) {
                                                 Text(
                                                     text = item.jenisKelamin,
                                                     style = MaterialTheme.typography.labelSmall,
+                                                    fontWeight = FontWeight.Bold,
                                                     color = MaterialTheme.colorScheme.onSecondaryContainer,
                                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                                 )
                                             }
                                             Spacer(Modifier.width(8.dp))
-                                            Text(
-                                                text = if (item.statusSehat) "Sehat" else "Sakit",
-                                                style = MaterialTheme.typography.labelSmall,
-                                                fontWeight = FontWeight.Bold,
-                                                color = if (item.statusSehat) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
-                                            )
+                                            Surface(
+                                                color = (if (item.statusSehat) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer).copy(alpha = 0.5f),
+                                                shape = RoundedCornerShape(8.dp)
+                                            ) {
+                                                Text(
+                                                    text = if (item.statusSehat) "Sehat" else "Sakit",
+                                                    style = MaterialTheme.typography.labelSmall,
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = if (item.statusSehat) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                                )
+                                            }
                                         }
                                     }
                                 },
                                 trailingContent = {
-                                    Row {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
                                         IconButton(onClick = { vm.restore(item) }) {
                                             Icon(
                                                 imageVector = Icons.Default.Restore,
-                                                contentDescription = "Pulihkan",
+                                                contentDescription = stringResource(R.string.pulihkan),
                                                 tint = MaterialTheme.colorScheme.primary
                                             )
                                         }
@@ -217,7 +227,7 @@ fun RecycleScreen(nav: NavHostController) {
                                         }) {
                                             Icon(
                                                 imageVector = Icons.Default.DeleteForever,
-                                                contentDescription = "Hapus Permanen",
+                                                contentDescription = stringResource(R.string.hapus_permanen),
                                                 tint = MaterialTheme.colorScheme.error
                                             )
                                         }
@@ -232,7 +242,7 @@ fun RecycleScreen(nav: NavHostController) {
 
         if (showDialog && itemToDelete != null) {
             DisplayAlertDialog(
-                title = "Hapus Permanen?",
+                title = stringResource(R.string.dialog_hapus_permanen_judul),
                 message = "Data ${itemToDelete?.namaHewan} akan dihapus selamanya.",
                 confirmText = "Hapus",
                 onDismiss = {

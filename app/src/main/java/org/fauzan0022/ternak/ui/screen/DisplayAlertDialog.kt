@@ -8,8 +8,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import org.fauzan0022.ternak.R
 
 @Composable
 fun DisplayAlertDialog(
@@ -55,7 +57,7 @@ fun DisplayAlertDialog(
 
         dismissButton = {
             TextButton(onClick = { onDismiss() }) {
-                Text(text = "Batal")
+                Text(text = stringResource(R.string.batal))
             }
         }
     )

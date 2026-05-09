@@ -53,11 +53,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import org.fauzan0022.ternak.R
 import org.fauzan0022.ternak.model.Kesehatan
 import org.fauzan0022.ternak.util.ViewModelFactory
 import java.text.SimpleDateFormat
@@ -89,7 +91,7 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Rekam Medis", fontWeight = FontWeight.ExtraBold) },
+                title = { Text(stringResource(R.string.rekam_medis), fontWeight = FontWeight.ExtraBold) },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     scrolledContainerColor = Color.Unspecified,
@@ -99,7 +101,7 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                 ),
                 navigationIcon = {
                     IconButton(onClick = { nav.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Kembali")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.kembali))
                     }
                 }
             )
@@ -117,12 +119,12 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 item {
-                    DetailCard(title = "Pemeriksaan Baru", icon = Icons.Default.AddModerator) {
+                    DetailCard(title = stringResource(R.string.pemeriksaan_baru), icon = Icons.Default.AddModerator) {
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                             DetailTextField(
                                 value = kondisi,
                                 onValueChange = { kondisi = it; errorKondisi = false },
-                                label = "Kondisi",
+                                label = stringResource(R.string.label_kondisi),
                                 modifier = Modifier.weight(1f),
                                 isError = errorKondisi,
                                 icon = Icons.Default.Description
@@ -130,7 +132,7 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                             DetailTextField(
                                 value = suhu,
                                 onValueChange = { if (it.all { c -> c.isDigit() || c == '.' }) { suhu = it; errorSuhu = false } },
-                                label = "Suhu °C",
+                                label = stringResource(R.string.label_suhu),
                                 modifier = Modifier.weight(0.7f),
                                 isError = errorSuhu,
                                 keyboardType = KeyboardType.Decimal,
@@ -141,7 +143,7 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                         DetailTextField(
                             value = diagnosa,
                             onValueChange = { diagnosa = it; errorDiagnosa = false },
-                            label = "Diagnosa",
+                            label = stringResource(R.string.label_diagnosa),
                             isError = errorDiagnosa,
                             icon = Icons.Default.HealthAndSafety
                         )
@@ -149,7 +151,7 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                         DetailTextField(
                             value = tindakan,
                             onValueChange = { tindakan = it },
-                            label = "Tindakan / Obat",
+                            label = stringResource(R.string.label_tindakan),
                             isError = errorTindakan,
                             icon = Icons.Default.Medication
                         )
@@ -157,7 +159,7 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                         DetailTextField(
                             value = dokter,
                             onValueChange = { dokter = it },
-                            label = "Tenaga Medis",
+                            label = stringResource(R.string.label_tenaga_medis),
                             icon = Icons.Default.PersonSearch
                         )
 
@@ -188,7 +190,7 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                         ) {
                             Icon(Icons.Default.Save, null, Modifier.size(18.dp))
                             Spacer(Modifier.width(8.dp))
-                            Text("Simpan Rekam Medis", fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.simpan_rekam_medis), fontWeight = FontWeight.Bold)
                         }
                     }
                 }
@@ -197,7 +199,7 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                         Icon(Icons.Default.History, null, tint = MaterialTheme.colorScheme.outline, modifier = Modifier.size(20.dp))
                         Spacer(Modifier.width(8.dp))
                         Text(
-                            "Riwayat Pemeriksaan",
+                            stringResource(R.string.riwayat_pemeriksaan),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onBackground
@@ -253,14 +255,14 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Icon(Icons.Default.MedicalInformation, null, Modifier.size(14.dp), tint = MaterialTheme.colorScheme.outline)
                                 Spacer(Modifier.width(6.dp))
-                                Text("Diagnosa: ${riwayat.diagnosa}", style = MaterialTheme.typography.bodySmall)
+                                Text(stringResource(R.string.format_diagnosa, riwayat.diagnosa), style = MaterialTheme.typography.bodySmall)
                             }
 
                             if (riwayat.tindakan.isNotBlank()) {
                                 Row(modifier = Modifier.padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
                                     Icon(Icons.Default.Healing, null, Modifier.size(14.dp), tint = MaterialTheme.colorScheme.outline)
                                     Spacer(Modifier.width(6.dp))
-                                    Text("Tindakan: ${riwayat.tindakan}", style = MaterialTheme.typography.bodySmall)
+                                    Text(stringResource(R.string.format_tindakan, riwayat.tindakan), style = MaterialTheme.typography.bodySmall)
                                 }
                             }
 
@@ -273,7 +275,7 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                                     Icon(Icons.Default.Badge, null, Modifier.size(14.dp), tint = MaterialTheme.colorScheme.primary)
                                     Spacer(Modifier.width(6.dp))
                                     Text(
-                                        riwayat.dokter.ifBlank { "Umum" },
+                                        riwayat.dokter.ifBlank { stringResource(R.string.tenaga_medis_umum) },
                                         style = MaterialTheme.typography.labelMedium,
                                         color = MaterialTheme.colorScheme.primary
                                     )
@@ -283,7 +285,7 @@ fun KesehatanScreen(nav: NavHostController, id: Long?) {
                                     onClick = { vm.delete(riwayat.id) },
                                     modifier = Modifier.size(32.dp)
                                 ) {
-                                    Icon(Icons.Default.DeleteOutline, "Hapus", tint = MaterialTheme.colorScheme.error, modifier = Modifier.size(20.dp))
+                                    Icon(Icons.Default.DeleteOutline, stringResource(R.string.hapus), tint = MaterialTheme.colorScheme.error, modifier = Modifier.size(20.dp))
                                 }
                             }
                         }
