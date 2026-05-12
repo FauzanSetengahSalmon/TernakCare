@@ -49,7 +49,7 @@
     <string name="label_suhu">Temp °C</string>
     <string name="label_diagnosa">Diagnosis</string>
     <string name="label_tindakan">Action / Medicine</string>
-    <string name="label_tenaga_medis">Medical Personnel</string>
+    <string name="label_tenaga_medis">Name Medical Personnel</string>
     <string name="simpan_rekam_medis">Save Medical Record</string>
     <string name="format_diagnosa">Diagnosis: %1$s</string>
     <string name="format_tindakan">Action: %1$s</string>

@@ -49,7 +49,7 @@
     <string name="label_suhu">Suhu °C</string>
     <string name="label_diagnosa">Diagnosa</string>
     <string name="label_tindakan">Tindakan / Obat</string>
-    <string name="label_tenaga_medis">Tenaga Medis</string>
+    <string name="label_tenaga_medis">Nama Tenaga Medis</string>
     <string name="simpan_rekam_medis">Simpan Rekam Medis</string>
     <string name="format_diagnosa">Diagnosa: %1$s</string>
     <string name="format_tindakan">Tindakan: %1$s</string>
