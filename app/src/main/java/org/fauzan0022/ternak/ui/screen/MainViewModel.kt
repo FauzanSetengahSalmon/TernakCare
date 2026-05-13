@@ -22,26 +22,6 @@ class MainViewModel(
     val recycleData: StateFlow<List<TernakRecycle>> = recycleDao.getAll()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    fun deleteToRecycle(item: Ternak) {
-        viewModelScope.launch {
-            recycleDao.insert(
-                TernakRecycle(
-                    id = item.id,
-                    kodeTernak = item.kodeTernak,
-                    namaHewan = item.namaHewan,
-                    jenisHewan = item.jenisHewan,
-                    jenisKelamin = item.jenisKelamin,
-                    umurBulan = item.umurBulan,
-                    beratKg = item.beratKg,
-                    statusSehat = item.statusSehat,
-                    tanggalMasuk = item.tanggalMasuk,
-                    catatan = item.catatan
-                )
-            )
-            ternakDao.deleteById(item.id)
-        }
-    }
-
     fun restore(item: TernakRecycle) {
         viewModelScope.launch {
             ternakDao.insert(
